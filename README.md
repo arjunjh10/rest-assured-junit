@@ -41,3 +41,6 @@ To Run Solution
 ===============
 1) mvn install
 2) mvn clean test allure:report
+
+
+Report generated under target/site/index.html
