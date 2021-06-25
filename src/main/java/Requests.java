@@ -1,5 +1,6 @@
 import io.restassured.response.Response;
 
+import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.given;
 
 public class Requests {
@@ -14,7 +15,7 @@ public class Requests {
                         spec(Base.createRequestSpecification()).
                         queryParam("postal_code", 2016).queryParam("key", apiKey).
                         when().
-                        get("forecast/daily").
+                        get(basePath).
                         then().
 //                        log().body().
         spec(Base.createResponseSpecification()).
