@@ -1,7 +1,11 @@
 import config.Configuration;
 import config.ConfigurationManager;
+import io.qameta.allure.restassured.AllureRestAssured;
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -19,15 +23,19 @@ public abstract class Base {
         configuration = ConfigurationManager.getConfiguration();
         baseURI = configuration.baseURI();
         basePath = configuration.basePath();
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 
     @AfterAll
     public static void afterAllTests() {
         System.out.println("Testing has finished");
+        RestAssured.reset();
     }
 
     public static RequestSpecification createRequestSpecification() {
-        return new RequestSpecBuilder().build();
+        return new RequestSpecBuilder()
+                .addFilter(new AllureRestAssured())
+                .build();
     }
 
     public static ResponseSpecification createResponseSpecification() {

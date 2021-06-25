@@ -1,3 +1,4 @@
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import models.ForecastData;
@@ -17,12 +18,13 @@ public class SampleTest extends Base {
 
     @ParameterizedTest
     @MethodSource("utils.TestParams#postalCodeData")
+    @Description("Test to demonstrate API Testing capabilities")
     public void testWeatherApi(Integer postalCode, String beachName) throws ParseException {
         requests = new Requests(configuration.apiKey());
         Response response = requests.getForeCastForNext16Days();
         ResponseBody responseBody = response.getBody();
-        List<models.ForecastData> forecasts  = response.jsonPath().getList("data", models.ForecastData.class);
 
+        List<models.ForecastData> forecasts  = response.jsonPath().getList("data", models.ForecastData.class);
         List<String> validDates = forecasts.stream().map(f -> f.getValidDate()).collect(Collectors.toList());
         List<Float> uvForecast = forecasts.stream().map(f -> f.getUv()).collect(Collectors.toList());
         List<Float> temperatureForecast = forecasts.stream().map(f -> f.getTemp()).collect(Collectors.toList());
