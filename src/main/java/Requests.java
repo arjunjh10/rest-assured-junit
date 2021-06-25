@@ -2,9 +2,9 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class Extractor {
+public class Requests {
     private String apiKey;
-    public Extractor(String apiKey) {
+    public Requests(String apiKey) {
         this.apiKey = apiKey;
     }
 
