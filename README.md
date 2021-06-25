@@ -4,7 +4,7 @@ This repository contains suggested solution to the code challenge problem 2 for 
 
 What do I need to run these samples?
 ---
-A Java 8 JDK and Maven. That's it.
+A Java JDK and Maven. That's it.
 
 What API is used for the samples?
 ---
